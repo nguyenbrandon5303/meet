@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
-import { getEvents } from './api';
+import { extractLocations, getEvents } from './api';
+import './nprogress.css';
 
 class App extends Component {
   state = {
@@ -12,11 +13,26 @@ class App extends Component {
 
   updateEvents = (location) => {
     getEvents().then((events) => {
-      const locationEvents = events.filter((event) => event.location === location);
+      const locationEvents = (location === 'all') ?
+        events :
+        events.filter((event) => event.location === location);
       this.setState({
         events: locationEvents
       });
     });
+  };
+
+  componentDidMount() {
+    this.mounted = true;
+    getEvents().then((events) => {
+      if (this.mounted) {
+        this.setState({ events, locations: extractLocations(events) });
+      }
+    });
+  };
+
+  componentWillUnmount() {
+    this.mounted = false;
   };
 
   render() {
@@ -26,7 +42,7 @@ class App extends Component {
         <EventList events={this.state.events} />
       </div>
     );
-  }
+  };
 }
 
 export default App;

@@ -18,7 +18,7 @@ class Event extends Component {
     return (
       <div className="Event">
         <h1 className="EventSummary">{event.summary}</h1>
-        <div className="EventStart">{event.start}</div>
+        <div className="EventStart">{event.start.dateTime}</div>
         <div className="EventLocation">{event.location}</div>
         <button className="showDetail" onClick={() => this.toggleDetails(detailsState)}>Details</button>
         {this.state.details && (
