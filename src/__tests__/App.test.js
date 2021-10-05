@@ -5,6 +5,7 @@ import EventList from '../EventList';
 import CitySearch from '../CitySearch';
 import { mockData } from '../mock-data';
 import { extractLocations, getEvents } from '../api';
+import NumberOfEvents from '../NumberOfEvents';
 
 // Unit Testing
 describe('<App /> component', () => {
@@ -58,6 +59,13 @@ describe('<App /> integration', () => {
     await suggestionItems.at(suggestionItems.length - 1).simulate('click');
     const allEvents = await getEvents();
     expect(AppWrapper.state('events')).toEqual(allEvents);
+    AppWrapper.unmount();
+  });
+  test('App passes "numberOfEvents" sate as a prop to NumberOfEvents', () => {
+    const AppWrapper = mount(<App />);
+    const AppNumberOfEventsState = AppWrapper.state('numberOfEvents');
+    expect(AppNumberOfEventsState).not.toEqual(undefined);
+    expect(AppWrapper.find(NumberOfEvents).props().numberOfEvents).toEqual(AppNumberOfEventsState);
     AppWrapper.unmount();
   });
 });
