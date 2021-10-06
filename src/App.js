@@ -24,7 +24,6 @@ class App extends Component {
         numberOfEvents: eventCount
       });
     });
-    console.log(eventCount);
   };
 
   componentDidMount() {
