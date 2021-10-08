@@ -32,7 +32,7 @@
 
 ### Show/Hide an Event's Details
 #### Scenario 1: An event element is collapsed by default
-##### Given user selected a city, when user is interested in an event, then the user should see a collapsed event that can be viewed for more information.
+##### Given user has not opened details to an event, when user is interested in an event, then the user should see a collapsed event that can be viewed for more information.
 
 #### Scenario 2: User can expand an event to see its details.
 ##### Given user is interested in an event, when user clicks "Show details," then the user should see more information about that event.
