@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { ErrorAlert } from './Alert';
 
 class NumberOfEvents extends Component {
   state = {
-    query: 32,
-    numberOutOfBounds: ''
+    query: 32
   };
 
   handleInputChanged = (event) => {
@@ -11,12 +11,12 @@ class NumberOfEvents extends Component {
     if (value > 0 && value < 100) {
       this.setState({
         query: value,
-        numberOutOfBounds: ''
+        errorText: ''
       });
     } else {
       this.setState({
         query: 32,
-        numberOutOfBounds: 'Please enter a number between 0 and 100.'
+        errorText: 'Please enter a number between 0 and 100.'
       });
     }
   };
@@ -31,7 +31,7 @@ class NumberOfEvents extends Component {
           value={this.state.query}
           onChange={this.handleInputChanged}
         />
-        <div className="OutOfBounds">{this.state.numberOutOfBounds}</div>
+        <ErrorAlert text={this.state.errorText} />
       </div>
     );
   }
