@@ -28,17 +28,18 @@ class App extends Component {
         events: locationEvents.slice(0, eventCount),
         numberOfEvents: eventCount
       });
-
-      if (!navigator.onLine) {
-        this.setState({
-          offlineText: 'You are currently offline. Displayed are cached events. Please go back online to have update the events.'
-        })
-      }
     });
   };
 
   async componentDidMount() {
     this.mounted = true;
+
+    // if (!navigator.onLine) {
+    //   this.setState({
+    //     offlineText: 'You are currently offline. Displayed are cached events. Please go back online to have update the events.'
+    //   })
+    // }
+
     const accessToken = localStorage.getItem('access_token');
     const isTokenValid = (await checkToken(accessToken)).error ? false :
       true;
