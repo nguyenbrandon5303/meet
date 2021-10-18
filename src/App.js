@@ -5,7 +5,6 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { extractLocations, getEvents, checkToken, getAccessToken } from './api';
 import './nprogress.css';
-// import { OfflineAlert } from './Alert';
 import WelcomeScreen from './WelcomeScreen';
 
 
@@ -14,7 +13,6 @@ class App extends Component {
     events: [],
     locations: [],
     numberOfEvents: 32,
-    // offlineText: '',
     showWelcomeScreen: undefined
   };
 
@@ -32,12 +30,6 @@ class App extends Component {
 
   async componentDidMount() {
     this.mounted = true;
-
-    // if (!navigator.onLine) {
-    //   this.setState({
-    //     offlineText: 'You are currently offline. Displayed are cached events. Please go back online to have update the events.'
-    //   })
-    // }
 
     const accessToken = localStorage.getItem('access_token');
     const isTokenValid = (await checkToken(accessToken)).error ? false :
@@ -63,7 +55,6 @@ class App extends Component {
 
     return (
       <div className="App" >
-        {/* <OfflineAlert text={this.state.offlineText} /> */}
         <p>Name of City:</p>
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
         <p>Number of Events:</p>
